@@ -1,0 +1,23 @@
+.stock-container{
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    width: 30%;
+}
+
+.stock-container .name h3, .stock-container .name h4 {
+    display: inline-block;
+}
+
+.positive {
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.negative {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -1,0 +1,42 @@
+<p>ex150 works!</p>
+
+<div class="form-group">
+    <form [formGroup]="exForm" (ngSubmit)="onSubmit()">
+        <div class="ex-name">
+            <input type="text"
+                placeholder="Podaj nazwę"
+                name="exName"
+                formControlName="name">
+        </div>
+        <div *ngIf="name.touched && name.invalid">
+            <p class="text-danger">Proszę uzupełnić pole!</p>
+        </div>
+        <div class="ex-price">
+            <input type="text"
+                placeholder="Podaj cenę"
+                name="exCena"
+                formControlName="price">
+        </div>
+        <div *ngIf="price.touched && price.invalid">
+            <p class="text-danger">Proszę uzupełnić pole!</p>
+        </div>
+        <div class="ex-url">
+            <input type="text"
+                placeholder="Podaj URL zdjęcia"
+                name="exUrl"
+                formControlName="url">
+        </div>
+        <div *ngIf="url.touched && url.invalid">
+            <p class="text-danger">nieporawny format URL!</p>
+        </div>
+        <div class="ex-onsale">
+            <select name="onsale" id="onsale" formControlName="onsale">
+                <option value="OnSale">On Sale</option>
+                <option value="NotOnSale">Not on sale</option>
+            </select>
+        </div>
+        <button class="btn btn-primary">Prześlij</button>
+    </form>
+</div>
+
+<p class="text-info">{{ exForm.value | json }}</p>
