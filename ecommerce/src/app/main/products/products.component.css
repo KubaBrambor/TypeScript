@@ -1,0 +1,19 @@
+.product-container {
+    display: inline-block;
+    border: solid black 5px;
+    border-radius: 10px;
+    padding: 20px 0px 20px 0px;
+    text-align: center;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+.quantity {
+    width: 15%;
+}
