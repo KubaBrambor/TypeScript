@@ -6,5 +6,5 @@
     <h5 [class]="product.quantity > 0 ? 'positive' : 'negative'">Avaliable</h5>
     <button class="minus" (click)="subtractQuantity()" [disabled]="product.amount === 0">-</button>
     <input type="text" class="quantity" [value]="product.amount">
-    <button class="plus"  [disabled]="product.quantity == product.amount">+</button>
+    <button class="plus" (click)="addQuantity()" [disabled]="product.quantity == product.amount">+</button>
 </div>
