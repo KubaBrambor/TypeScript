@@ -25,4 +25,10 @@ export class ProductsListComponent implements OnInit {
     this.productsList[i].amount--;
   }
   
+  productStyles(i, productsList){
+    return {
+      'positive': productsList[i].inStock(),
+      'negative': !productsList[i].inStock()
+    }
+  } 
 }
