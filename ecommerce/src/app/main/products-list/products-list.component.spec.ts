@@ -1,25 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductsListComponent } from './products-list.component';
+import { Product } from '../../model/product';
 
-describe('ProductsListComponent', () => {
-  let component: ProductsListComponent;
-  let fixture: ComponentFixture<ProductsListComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ProductsListComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProductsListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+describe('AppComponent', () => {
+  it('should have product instantiated on ngInit', () => {
+    const productListComponent = new ProductsListComponent();
+    expect(productListComponent.product).toBeUndefined();
+    productListComponent.ngOnInit();
+    expect(productListComponent.product).toEqual(
+      new Product('Stol', 20, 'url', false, 20));
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  it('should add product', () => {
+    const productListComponent = new ProductsListComponent();
+    productListComponent.ngOnInit();
+    expect(productListComponent.productsList[0].favourite).toBeFalsy()
+  })
+})
