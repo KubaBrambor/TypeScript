@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit {
   @Input() public productsArray: Product[];
   @Output() private sendIndex: EventEmitter<number>;
   @Output() private sendIndexSubstract: EventEmitter<number>;
+  public product: Product;
   constructor() {
     this.sendIndex = new EventEmitter<number>();
     this.sendIndexSubstract = new EventEmitter<number>();

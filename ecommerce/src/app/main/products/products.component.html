@@ -1,8 +1,8 @@
 <p>products works!</p>
 
 <div *ngFor="let product of productsArray; index as i" class="product-container">
-    <h3>{{product.name}}</h3>
-    <h4>Cena: {{product.prize}} zł</h4>
+    <h3 class="name">{{product.name}}</h3>
+    <h4 class="price">Cena: {{product.prize}} zł</h4>
     <h5 [ngClass]="productClassesFunc(i)">Avaliable</h5>
     <button class="minus" (click)="subtractQuantity(i)" *ngIf="product.amount !== 0">-</button>
     <input type="text" class="quantity" [value]="product.amount">
