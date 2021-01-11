@@ -1,25 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
+
 
 import { ProductsComponent } from './products.component';
+import { Product } from '../../model/product';
+import { By } from '@angular/platform-browser';
 
-describe('ProductsComponent', () => {
-  let component: ProductsComponent;
-  let fixture: ComponentFixture<ProductsComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ProductsComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ProductsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+describe('Product Component', () => {
+  it('Should have productsArray instantiated on OnInit', () => {
+    const productsComponent = new ProductsComponent;
+    expect(productsComponent.productsArray).toBeUndefined();
+    
+  })
+})
