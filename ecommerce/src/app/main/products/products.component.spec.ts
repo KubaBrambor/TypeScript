@@ -41,7 +41,7 @@ describe('Product Component', () => {
 
     expect(quantity).toBeUndefined();
     addQuantity.triggerEventHandler('click', null);
-    expect(quantity).toEqual(1)
+    expect(quantity).toEqual(1);
   })
 
   it('Should have productsArray instantiated on OnInit', () => {
