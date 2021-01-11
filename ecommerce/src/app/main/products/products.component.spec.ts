@@ -26,8 +26,11 @@ describe('Product Component', () => {
   })
 
   it('should create stock component and render stock data', () => {
-    const nameElement = fixture.debugElement.query(By.css('h3'));
+    const nameElement = fixture.debugElement.query(By.css('.name'));
     expect(nameElement.nativeElement.textContent).toEqual('Krzeslo');
+    const priceElemenet = fixture.debugElement.query(By.css(".price"));
+    expect(priceElemenet.nativeElement.textContent).toEqual('Cena: 20 zł');
+    
   })
 
   it('Should have productsArray instantiated on OnInit', () => {
