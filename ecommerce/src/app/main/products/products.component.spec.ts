@@ -30,7 +30,18 @@ describe('Product Component', () => {
     expect(nameElement.nativeElement.textContent).toEqual('Krzeslo');
     const priceElemenet = fixture.debugElement.query(By.css(".price"));
     expect(priceElemenet.nativeElement.textContent).toEqual('Cena: 20 zł');
-    
+    const minusQuantity = fixture.debugElement.query(By.css('.minus'));
+    expect(minusQuantity).toBeDefined();
+  })
+
+  it('should trigger plus buttom emitter', () => {
+    let quantity: number;
+    component.addQuantity = ()=>{quantity=1}
+    const addQuantity = fixture.debugElement.query(By.css('.plus'));
+
+    expect(quantity).toBeUndefined();
+    addQuantity.triggerEventHandler('click', null);
+    expect(quantity).toEqual(1)
   })
 
   it('Should have productsArray instantiated on OnInit', () => {

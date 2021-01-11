@@ -1,6 +1,9 @@
+import { TestBed, async } from '@angular/core/testing';
+
 import { ProductsListComponent } from './products-list.component';
-import { Product } from '../../model/product';
 import { ProductsComponent } from '../products/products.component';
+import { Product } from '../../model/product';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   it('should have product instantiated on ngInit', () => {
