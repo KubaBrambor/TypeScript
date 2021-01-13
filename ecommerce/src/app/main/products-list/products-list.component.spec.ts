@@ -85,8 +85,8 @@ describe('ProductsListComponent', () => {
 
       expect(component.productsList[0].amount).toEqual(2);
 
-      plusButtonEl = fixture.debugElement.nativeElement.querySelector('.plus');
-      expect(plusButtonEl.disabled).toBeTruthy()
+      plusButtonEl = fixture.debugElement.query(By.css('.plus'))
+      expect(plusButtonEl.nativeElement.disabled).toBeTruthy()
     })
   });
 });
