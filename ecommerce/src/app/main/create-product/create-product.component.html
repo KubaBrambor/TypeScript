@@ -1,0 +1,16 @@
+<p>create-product works!</p>
+
+<div class="form-group">
+    <form>
+        <div class="stock-name">
+            <input type="text"
+                    placeholder="product name"
+                    name="productName"
+                    [ngModel]="product.name"
+                    (ngModelChange)="product.name=$event">
+        </div>
+    </form>
+    <button (click)="product.name='TEST'">reset product name</button>
+</div>
+
+<h4>Product name is {{product.name}}</h4>
