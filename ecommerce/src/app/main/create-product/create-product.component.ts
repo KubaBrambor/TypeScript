@@ -13,4 +13,7 @@ export class CreateProductComponent {
     this.product = new Product("Margaryna", 20, 'url', false, 20);
   }
 
+  printValue(event) {
+    this.product.name = event.toUpperCase()
+  }
 }
