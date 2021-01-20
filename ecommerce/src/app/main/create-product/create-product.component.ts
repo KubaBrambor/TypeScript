@@ -8,7 +8,8 @@ import { Product } from '../../model/product';
 })
 export class CreateProductComponent {
   public product: Product; 
-  public productArr: Product[];
+  public productArr: {}[] = [];
+  public confirmed: boolean = false;
   
   constructor() {
     this.product = new Product("Margaryna", 0, '', false, 0);
@@ -18,7 +19,8 @@ export class CreateProductComponent {
     this.product.name = event.toUpperCase()
   }
   createProduct() {
-    this.productArr.push(this.product);
+    this.productArr.push({});
+    Object.assign(this.productArr[this.productArr.length-1], this.product)
     console.log(this.productArr);
   }
 }
