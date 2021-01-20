@@ -1,16 +1,48 @@
 <p>create-product works!</p>
 
 <div class="form-group">
-    <form>
+    <form (ngSubmit)="createProduct()">
         <div class="stock-name">
             <input type="text"
                     placeholder="product name"
                     name="productName"
-                    [ngModel]="product.name" 
-                    (ngModelChange)="printValue($event)">    
+                    [ngModel]="product.name"
+                    (ngModelChange)="product.name=$event">    
         </div>
+        <div class="stock-name">
+            <input type="text"
+                    placeholder="product prize"
+                    name="productPrize"
+                    [(ngModel)]="product.prize" >    
+        </div>
+        <div class="stock-name">
+            <input type="text"
+                    placeholder="product image URL"
+                    name="productURL"
+                    [(ngModel)]="product.imageURL">    
+        </div>
+        <div class="productOnSale">
+            <div class="stock-name">
+                <input type="radio"
+                        placeholder="on sale?"
+                        name="productOnSaleTrue"
+                        [(ngModel)]="product.onSale" [value]=true> True  
+            </div>
+            <div class="stock-name">
+                <input type="radio"
+                        placeholder="on sale?"
+                        name="productOnSaleFalse"
+                        [(ngModel)]="product.onSale" [value]=false> False 
+            </div>
+        </div>  
+        <div class="stock-name">
+            <input type="text"
+                    placeholder="product quantity"
+                    name="productQuantity"
+                    [(ngModel)]="product.quantity" >    
+        </div>  
     </form>
     <button (click)="product.name='TEST'">reset product name</button>
 </div>
 
-<h4>Product name is {{product.name}}</h4>
+<h4>Product name is {{product.onSale}}</h4>

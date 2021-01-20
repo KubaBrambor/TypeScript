@@ -8,12 +8,17 @@ import { Product } from '../../model/product';
 })
 export class CreateProductComponent {
   public product: Product; 
+  public productArr: Product[];
   
   constructor() {
-    this.product = new Product("Margaryna", 20, 'url', false, 20);
+    this.product = new Product("Margaryna", 0, '', false, 0);
   }
 
   printValue(event) {
     this.product.name = event.toUpperCase()
+  }
+  createProduct() {
+    this.productArr.push(this.product);
+    console.log(this.productArr);
   }
 }
