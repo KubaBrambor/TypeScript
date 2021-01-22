@@ -7,5 +7,21 @@ html, body {
     margin-bottom: -110px;
   }
 .footer, .push {
+    margin-top: 50px;
     height: 50px;
   }
+
+.albumCard {
+  width: 200px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.card-content {
+  height: 130px;
+}
+
+.cardButton {
+  width:70px;
+  margin-left: 40px;
+}
