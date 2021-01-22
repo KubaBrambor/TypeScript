@@ -18,6 +18,8 @@ const photosURL = "https://jsonplaceholder.typicode.com/photos";
 //     }
 // }
 
+
+
 (async function getData(albumUrl, photoUrl){
     const [albumsResponse, photosResponse] = await Promise.all([
         fetch(albumUrl),
@@ -38,6 +40,10 @@ const photosURL = "https://jsonplaceholder.typicode.com/photos";
 })(albumsURL, photosURL)
 .then(({albums, photos})=>{
     console.log(albums)
+    createAlbumCards(albums, photos);
+})
+
+function createAlbumCards(albums, photos){
     for(album of albums){
         const photoAlbum = photos.filter(photo=>photo.albumId === album.id)
         const cardRow = document.createElement('div');
@@ -62,6 +68,9 @@ const photosURL = "https://jsonplaceholder.typicode.com/photos";
         const cardButton = document.createElement('button');
         cardButton.className = "waves-effect waves-light btn blue cardButton";
         cardButton.innerText = "OPEN"
+
+        cardButton.addEventListener('click', createPhotoCards)
+
         cardButtonDiv.appendChild(cardButton);
         card.appendChild(cardImage);
         card.appendChild(cardContent);
@@ -70,8 +79,17 @@ const photosURL = "https://jsonplaceholder.typicode.com/photos";
         cardRow.appendChild(card);
         container.appendChild(cardRow);
     }
-    
-})
+}
+
+//open photos from album
+function createPhotoCards(albums, photos){
+    const albumCards = document.getElementsByClassName('albumCard');
+    while(albumCards.length){
+        albumCards[0].remove();
+    };
+
+
+}
 
 // (async function check(){
 //     await getData("https://jsonplaceholder.typicode.com/albums")
