@@ -40,10 +40,28 @@ const photosURL = "https://jsonplaceholder.typicode.com/photos";
 })(albumsURL, photosURL)
 .then(({albums, photos})=>{
     console.log(albums)
+    console.log(photos)
+    const photoTitle = document.createElement('h1');
+    photoTitle.id = 'mainTitle';
+    photoTitle.innerText = "ALBUMS";
+    container.appendChild(photoTitle);
+    const upButton = document.createElement('button');
+    upButton.id = "upButton";
+    upButton.className = "btn-floating btn-large waves-effect waves-light";
+    upButton.addEventListener('click', () => {
+        window.scrollTo(0,0);
+    });
+    const backButtonIcon = document.createElement('i');
+    backButtonIcon.className = "material-icons";
+    backButtonIcon.id = "upButtonIcon";
+    backButtonIcon.innerText = "arrow_upward";
+    upButton.appendChild(backButtonIcon);
+    container.appendChild(upButton);
     createAlbumCards(albums, photos);
 })
 
 function createAlbumCards(albums, photos){
+    console.log(photos)
     for(album of albums){
         const photoAlbum = photos.filter(photo=>photo.albumId === album.id)
         const cardRow = document.createElement('div');
@@ -69,7 +87,7 @@ function createAlbumCards(albums, photos){
         cardButton.className = "waves-effect waves-light btn blue cardButton";
         cardButton.innerText = "OPEN"
 
-        cardButton.addEventListener('click', createPhotoCards)
+        cardButton.addEventListener('click', createPhotoCards.bind(Object.create(null), albums, photos, album.id))
 
         cardButtonDiv.appendChild(cardButton);
         card.appendChild(cardImage);
@@ -82,13 +100,72 @@ function createAlbumCards(albums, photos){
 }
 
 //open photos from album
-function createPhotoCards(albums, photos){
+function createPhotoCards(albums, photos, albumId){
     const albumCards = document.getElementsByClassName('albumCard');
+    const photosFiltered = photos.filter(photo=>photo.albumId===albumId)
+    const backButton = document.createElement('button');
+    
+    backButton.className = "btn-floating btn-large waves-effect waves-light"
+    backButton.id = "backButton";
+    backButton.addEventListener('click', () => {
+        const photoElements = document.getElementsByClassName('photoCard');
+        document.getElementById('mainTitle').innerText = "ALBUMS";
+        document.getElementById('subTitlePhotos').remove();
+        backButton.remove()
+
+        while(photoElements.length){
+            photoElements[0].remove();
+        };
+        window.scrollTo(0, 0);
+        createAlbumCards(albums, photos);   
+    })
+    const backButtonIcon = document.createElement('i');
+    backButtonIcon.className = "material-icons";
+    backButtonIcon.id = "backButtonIcon";
+    backButtonIcon.innerText = "arrow_back";
+    const albumTitle = document.createElement('h5');
+    albumTitle.id = 'subTitlePhotos'
+    albumTitle.innerText = `Album title: "${albums[albumId-1].title}"`
+    document.getElementById('mainTitle').innerText ="PHOTOS"
+    console.log(photosFiltered)
     while(albumCards.length){
         albumCards[0].remove();
     };
-
-
+    backButton.appendChild(backButtonIcon);
+    container.appendChild(backButton);
+    container.appendChild(albumTitle);
+    window.scrollTo(0, 0);
+    for(photo of photosFiltered){
+        const cardRow = document.createElement('div');
+        cardRow.className = "row photoCard";
+        const cardCol = document.createElement('div');
+        cardCol.className = "col s10 m7";
+        const card = document.createElement('div');
+        card.className = "card";
+        const cardImage = document.createElement('div');
+        cardImage.className = "card-image";
+        const cardImg = document.createElement('img');
+        cardImg.src = photo.thumbnailUrl;
+        cardImage.appendChild(cardImg);
+        const cardContent = document.createElement('div');
+        cardContent.className = 'card-content'
+        const cardTitle = document.createElement('p');
+        cardTitle.innerText = photo.title;
+        cardTitle.className = "cardTitle";
+        cardContent.appendChild(cardTitle);
+        const cardButtonDiv = document.createElement('div');
+        cardButtonDiv.className = "card-action";
+        const cardButton = document.createElement('button');
+        cardButton.className = "waves-effect waves-light btn blue photoButton";
+        cardButton.innerText = "OPEN"
+        cardButtonDiv.appendChild(cardButton);
+        card.appendChild(cardImage);
+        card.appendChild(cardContent);
+        card.appendChild(cardButtonDiv);
+        cardCol.appendChild(card);
+        cardRow.appendChild(card);
+        container.appendChild(cardRow);
+    }
 }
 
 // (async function check(){

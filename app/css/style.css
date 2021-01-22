@@ -64,3 +64,50 @@ input, input:focus {
   width:70px;
   margin-left: 40px;
 }
+
+.photoCard {
+  width: 300px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+#mainTitle {
+  font-family:fantasy;
+  text-align: center;
+  font-weight: bold;
+  color:rgba(15, 101, 199, 0.671);
+  background-color: rgb(228, 228, 228);
+  border-radius: 30px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#subTitlePhotos {
+  font-family: cursive;
+  font-style: italic;
+  text-align: center;
+  color: rgba(4, 27, 53, 0.671);
+}
+
+#backButton, #upButton {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(0, 89, 190, 0.671);
+}
+
+#backButton {
+  margin-left: -5%;
+}
+
+#upButton {
+  margin-left: 65%;
+}
+
+#backButtonIcon, #upButtonIcon {
+  font-size: 80px;
+  margin-top: 20px;
+}
