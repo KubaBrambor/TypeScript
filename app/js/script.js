@@ -46,15 +46,16 @@ const photosURL = "https://jsonplaceholder.typicode.com/photos";
     upButton.addEventListener('click', () => {
         window.scrollTo(0,0);
     });
+    const searchButton = document.getElementById('searchButton');
+    searchButton.addEventListener('click', searchCards.bind(Object.create(null), albums, photos))
     createAlbumCards(albums, photos);
 })
 
 function createAlbumCards(albums, photos){
-    console.log(photos)
     for(album of albums){
         const photoAlbum = photos.filter(photo=>photo.albumId === album.id)
         const cardRow = document.createElement('div');
-        cardRow.className = "row albumCard";
+        cardRow.className = "row card_row albumCard";
         const cardCol = document.createElement('div');
         cardCol.className = "col s10 m7";
         const card = document.createElement('div');
@@ -90,14 +91,14 @@ function createAlbumCards(albums, photos){
 
 //open photos from album
 function createPhotoCards(albums, photos, albumId){
-    const albumCards = document.getElementsByClassName('albumCard');
+    const albumCards = document.getElementsByClassName('card_row');
     const photosFiltered = photos.filter(photo=>photo.albumId===albumId)
     const backButton = document.createElement('button');
     
     backButton.className = "btn-floating btn-large waves-effect waves-light"
     backButton.id = "backButton";
     backButton.addEventListener('click', () => {
-        const photoElements = document.getElementsByClassName('photoCard');
+        const photoElements = document.getElementsByClassName('card_row');
         document.getElementById('mainTitle').innerText = "ALBUMS";
         document.getElementById('subTitlePhotos').remove();
         backButton.remove()
@@ -126,7 +127,7 @@ function createPhotoCards(albums, photos, albumId){
     window.scrollTo(0, 0);
     for(photo of photosFiltered){
         const cardRow = document.createElement('div');
-        cardRow.className = "row photoCard";
+        cardRow.className = "row card_row photoCard";
         const cardCol = document.createElement('div');
         cardCol.className = "col s10 m7";
         const card = document.createElement('div');
@@ -154,8 +155,33 @@ function createPhotoCards(albums, photos, albumId){
         cardCol.appendChild(card);
         cardRow.appendChild(card);
         container.appendChild(cardRow);
+    };
+};
+
+function searchCards(albums, photos){
+    const cardElements = document.getElementsByClassName('card_row');
+    const searchInputValue = document.getElementById('searchInputValidate').value;
+    const albumsTitle = albums.map(album => album.title);
+    const photosTitle = photos.map(photo => photo.title);
+    console.log(`input: ${searchInputValue}, albumsTitle: ${albumsTitle}, photosTitle: ${photosTitle}`);
+    stringSimilarity.findBestMatch(searchInputValue, albumsTitle);
+    const albumsSimilarity = stringSimilarity.findBestMatch(searchInputValue, albumsTitle).ratings.filter(rating=>rating.rating>0.2);
+    const albumsFound = [];
+    while(cardElements.length){
+        cardElements[0].remove();
+    };
+    console.dir(albumsSimilarity[0].target)
+    for(albumSim of albumsSimilarity){
+        console.log(`albumSim: ${albumSim.target}`)
+        for(album of albums){
+            if(album.title===albumSim.target){
+                albumsFound.push(album);
+            }
+        }
     }
+    console.log(albumsFound)
 }
+    
 
 // (async function check(){
 //     await getData("https://jsonplaceholder.typicode.com/albums")
