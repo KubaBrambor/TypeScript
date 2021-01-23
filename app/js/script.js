@@ -1,4 +1,5 @@
 console.log("connected!")
+console.log(stringSimilarity.findBestMatch('Kuba', ['Jakub', 'Kubek', 'Kubson']).bestMatch)
 
 let albums;
 let photos;
@@ -41,22 +42,10 @@ const photosURL = "https://jsonplaceholder.typicode.com/photos";
 .then(({albums, photos})=>{
     console.log(albums)
     console.log(photos)
-    const photoTitle = document.createElement('h1');
-    photoTitle.id = 'mainTitle';
-    photoTitle.innerText = "ALBUMS";
-    container.appendChild(photoTitle);
-    const upButton = document.createElement('button');
-    upButton.id = "upButton";
-    upButton.className = "btn-floating btn-large waves-effect waves-light";
+    const upButton = document.getElementById('upButton');
     upButton.addEventListener('click', () => {
         window.scrollTo(0,0);
     });
-    const backButtonIcon = document.createElement('i');
-    backButtonIcon.className = "material-icons";
-    backButtonIcon.id = "upButtonIcon";
-    backButtonIcon.innerText = "arrow_upward";
-    upButton.appendChild(backButtonIcon);
-    container.appendChild(upButton);
     createAlbumCards(albums, photos);
 })
 
