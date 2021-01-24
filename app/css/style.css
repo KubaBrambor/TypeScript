@@ -1,7 +1,12 @@
 html, body {
   height: 100%;
   margin: 0;
+  background-color: #ececec;
   }
+
+.nav-wrapper {
+  background-color: #2196F3;
+}
 
 .wrapper {
   min-height: 100%;
@@ -73,16 +78,36 @@ input, input:focus {
 
 .albumCard {
   width: 200px;
+  padding-left: 3px;
+  padding-right: 3px;
   margin-left: 10px;
   display: inline-block;
+  transition: width 1s, height 1s;
+}
+
+.albumCard:hover {
+  /* padding-right: 10px;
+  padding-left: 10px;
+  width: 210px; */
+  font-weight: bold;
+}
+
+.albumContent {
+  transition: width 1s, height 1s;
+}
+
+.albumContent:hover {
+  height: 180px;
 }
 
 .card-content {
   height: 130px;
+  
 }
 
 .card-action {
   background-color: rgb(245, 245, 245) !important;
+  height: 70px;
 }
 
 .cardButton {
@@ -90,10 +115,39 @@ input, input:focus {
   margin-left: 40px;
 }
 
+.card {
+  border-radius: 10px;
+}
+
 .photoCard {
   width: 300px;
   margin-left: 10px;
   display: inline-block;
+  transition: width 0.5s, height 0.5s;
+}
+
+.photoCard:hover {
+  width: 320px;
+}
+
+.zoomButton {
+  background-color: rgb(245, 245, 245);
+  width: 260px;
+}
+
+.zoomIcon {
+  font-size: 45px !important;
+  color: rgba(0, 0, 0, 0.438);
+  margin-left: 40%;
+}
+
+.card-image {
+  border: solid 40px  rgb(245, 245, 245);
+  border-radius: 10px;
+}
+
+.cardTitle {
+  font-size: 20px !important;
 }
 
 #mainTitle {
@@ -139,6 +193,14 @@ input, input:focus {
   margin-top: 20px;
 }
 
+#modal1 {
+  height: 710px !important;
+  width: 650px;
+}
+
+.modal .modal-footer {
+  background-color:  rgb(245, 245, 245);
+}
 /* .contentYellow {
   background-color: rgba(250, 236, 159, 0.918);
 }

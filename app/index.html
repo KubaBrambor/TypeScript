@@ -17,7 +17,7 @@
     <div class="wrapper">
     <!-- navigation menu -->
       <nav>
-        <div class="nav-wrapper blue">
+        <div class="nav-wrapper">
           <a href="index.html" class="brand-logo"><i class="material-icons" id="logoIcon">insert_photo</i>Photo App</a>
           <ul class="right hide-on-med-and-down" id="searchTool">
             <li id="searchAlbums">
@@ -38,10 +38,22 @@
         </div>
       </nav>
       <div id="mainContainer" class="container">
+        <!-- Modal Structure -->
+        <div id="modal1" class="modal">
+          <div class="modal-content">
+            <img src="" alt="" id="modalImg">
+          </div>
+          <div class="modal-footer">
+            <a href="#!"  id="modalCloseText" class="modal-close waves-effect waves-green btn-flat">Close</a>
+          </div>
+        </div>
         <h1 id="mainTitle">ALBUMS</h1>
         <button id="upButton" class="btn-floating btn-large waves-effect waves-light"><i class="material-icons" id="upButtonIcon">arrow_upward</i></button>
       </div>
-      <div class="push"></div>
+      <div class="push" id="pushDiv">
+
+
+      </div>
     </div>
       <!-- footer -->
       <footer class="page-footer blue">
