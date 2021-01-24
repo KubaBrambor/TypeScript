@@ -73,8 +73,10 @@ function createAlbumCards(albums){
         // const cardImg = document.createElement('img');
         // cardImg.src = photoAlbum[0].thumbnailUrl;
         // cardImage.appendChild(cardImg);
+        const colorsArray = ['contentYellow', 'contentBlue', 'contentRed', 'contentGrey', 'contentLemon', 'contentIris', 'contentTeal', 'contentViolet']
+        const color = colorsArray[Math.floor(Math.random()*colorsArray.length)];
         const cardContent = document.createElement('div');
-        cardContent.className = 'card-content'
+        cardContent.className = `card-content ${color}`
         const cardTitle = document.createElement('p');
         cardTitle.innerText = album.title;
         cardTitle.className = "cardTitle";
