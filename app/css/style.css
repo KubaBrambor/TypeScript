@@ -21,6 +21,27 @@ html, body {
   font-size: 50px;
 }
 
+#searchPhotos {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+#searchAlbums {
+  margin-right: -90px;
+  margin-top: -15px;
+}
+
+[type="radio"].with-gap:checked+span:after {
+  transform: scale(1.2);
+  border: 2px solid #0040f0;
+  font-weight: bold;
+  background-color: white !important;
+}
+
+#searchPhotosSpan, #searchAlbumsSpan {
+  color: white !important;
+}
+
 #searchTool {
   margin-right: 20px;
 }
@@ -58,6 +79,7 @@ input, input:focus {
 
 .card-content {
   height: 130px;
+  background-color: rgb(168, 168, 168);
 }
 
 .cardButton {
@@ -100,11 +122,13 @@ input, input:focus {
 }
 
 #backButton {
-  margin-left: -5%;
+  margin-left: -200px;
+  margin-right: auto;
 }
 
 #upButton {
-  margin-left: 65%;
+  margin-left: -100px;
+  margin-right: auto;
 }
 
 #backButtonIcon, #upButtonIcon {
