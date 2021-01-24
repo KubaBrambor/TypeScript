@@ -86,9 +86,6 @@ input, input:focus {
 }
 
 .albumCard:hover {
-  /* padding-right: 10px;
-  padding-left: 10px;
-  width: 210px; */
   font-weight: bold;
 }
 
@@ -201,34 +198,3 @@ input, input:focus {
 .modal .modal-footer {
   background-color:  rgb(245, 245, 245);
 }
-/* .contentYellow {
-  background-color: rgba(250, 236, 159, 0.918);
-}
-
-.contentBlue {
-  background-color: rgba(169, 208, 253, 0.671);
-}
-
-.contentRed {
-  background-color: rgba(255, 194, 192, 0.671);
-}
-
-.contentGrey {
-  background-color: rgba(207, 207, 207, 0.671);
-}
-
-.contentLemon {
-  background-color: rgba(254, 255, 182, 0.671);
-}
-
-.contentIris {
-  background-color: rgba(228, 208, 251, 0.671);
-}
-
-.contentTeal {
-  background-color: rgba(197, 249, 253, 0.671);
-}
-
-.contentViolet {
-  background-color: rgba(248, 191, 255, 0.671);
-} */

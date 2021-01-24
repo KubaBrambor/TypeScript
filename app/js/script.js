@@ -12,13 +12,14 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ---------------------------- starting app -----------------------------*/
 getData(albumsURL)
 .then((albums)=>{
-    console.log(albums)
     const upButton = document.getElementById('upButton');
     upButton.addEventListener('click', () => {  //move view to the top
         window.scrollTo(0,0);
     });
     const searchButton = document.getElementById('searchButton');   //trigger search functionality
-    searchButton.addEventListener('click', searchCards.bind(Object.create(null), albums))
+    searchButton.addEventListener('click', () => {
+        searchCards(albums);
+    });
     createAlbumCards(albums);   //start creating album cards on main page
 })
 .catch(error => console.log(`Error message: ${error}`));
@@ -48,7 +49,6 @@ function createAlbumCards(albums){
         document.getElementById('subTitlePhotos').remove();
     };
     for(let album of albums){
-        // const photoAlbum = photos.filter(photo=>photo.albumId === album.id)
         const cardRow = document.createElement('div');
         cardRow.className = "row card_row albumCard";
         const cardCol = document.createElement('div');
@@ -70,7 +70,6 @@ function createAlbumCards(albums){
         cardButton.innerText = "OPEN";
         cardButton.addEventListener('click', printPhotoCards.bind(Object.create(null), albums, album.id, album.title));
         cardButtonDiv.appendChild(cardButton);
-        // card.appendChild(cardImage);
         card.appendChild(cardContent);
         card.appendChild(cardButtonDiv);
         cardCol.appendChild(card);
@@ -85,7 +84,6 @@ function printPhotoCards(albums, albumId, albumTitle){
         createPhotoCards(photos, albums, albumTitle);
     });
 };
-
 //creating cards
 function createPhotoCards(photos, albums, albumTitle){
     console.log(photos);
@@ -101,7 +99,7 @@ function createPhotoCards(photos, albums, albumTitle){
     while(albumCards.length){   //cleaning container from album cards
         albumCards[0].remove();
     };
-    window.scrollTo(0, 0);  //scroll view up
+    window.scrollTo(0, 0);  //scroll up the view
     for(let photo of photos){   //create cards
         const cardRow = document.createElement('div');
         cardRow.className = "row card_row photoCard";
@@ -125,7 +123,6 @@ function createPhotoCards(photos, albums, albumTitle){
         const cardButton = document.createElement('a');
         cardButton.className = "waves-effect waves-light modal-trigger zoomButton";
         cardButton.href=`#modal1`;
-        // cardButton.innerText = "OPEN"
         cardButton.addEventListener('click', ()=> {
             document.getElementById('modalImg').src=photo.url;
         })
@@ -142,7 +139,7 @@ function createPhotoCards(photos, albums, albumTitle){
         container.appendChild(cardRow);
     };
 };
-
+//search functionality to match albums and photos by title
 function searchCards(albums){   //get albums by default, as parameter, since we download or albums at the beginning
     const checkedAlbumsOption = document.getElementById('searchAlbumsRadio').checked;
     const checkedPhotosOption = document.getElementById('searchPhotosRadio').checked;
@@ -158,8 +155,7 @@ function searchCards(albums){   //get albums by default, as parameter, since we 
         const matchedAlbums = searchCardsLogic(albums, 0.35);
         createAlbumCards(matchedAlbums);
     } else if(checkedPhotosOption){
-        console.log('PHOTOS CHECKED')
-        getData(photosURL)
+        getData(photosURL)  //get photos to compare their titles for match
         .then((photos) => {
             if(document.getElementById('subTitlePhotos')){
                 document.getElementById('subTitlePhotos').remove();
@@ -173,7 +169,8 @@ function searchCards(albums){   //get albums by default, as parameter, since we 
         });
     };
 };
-
+/* logic with implemented "string-similarity" based on Dice's Coefficient
+    https://www.npmjs.com/package/string-similarity */
 function searchCardsLogic(contentArray, ratingValue){
     let result = []; //array for matching albums
     let input = document.getElementById('searchInputValidate');
@@ -193,24 +190,14 @@ function searchCardsLogic(contentArray, ratingValue){
     input.value = "";  //clear search input
     return result;
 };
-
+//creating back buttons with their functionality
 function createBackButton(albums){
     const backButton = document.createElement('button');
     backButton.className = "btn-floating btn-large waves-effect waves-light"
     backButton.id = "backButton";
     backButton.addEventListener('click', () => {
-        const photoElements = document.getElementsByClassName('card_row');
-        document.getElementById('mainTitle').innerText = "ALBUMS";
-        if(document.getElementById('subTitlePhotos')){
-            document.getElementById('subTitlePhotos').remove();
-        };
-        backButton.remove();
-
-        while(photoElements.length){
-            photoElements[0].remove();
-        };
-        window.scrollTo(0, 0);
-        createAlbumCards(albums);   
+        backButtonFunctionality(backButton);
+        createAlbumCards(albums);  
     });
     const backButtonIcon = document.createElement('i');
     backButtonIcon.className = "material-icons";
@@ -218,4 +205,19 @@ function createBackButton(albums){
     backButtonIcon.innerText = "arrow_back";
     backButton.appendChild(backButtonIcon);
     container.appendChild(backButton);
+};
+//back button functionality
+function backButtonFunctionality(button){
+    const photoElements = document.getElementsByClassName('card_row');
+    const mainTitle = document.getElementById('mainTitle');
+    mainTitle.innerText = "ALBUMS";
+    const subTitle = document.getElementById('subTitlePhotos');
+    if(subTitle){
+        subTitle.remove();
+    };
+    button.remove();
+    while(photoElements.length){
+        photoElements[0].remove();
+    };
+    window.scrollTo(0, 0);   
 };
