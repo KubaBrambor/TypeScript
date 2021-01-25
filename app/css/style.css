@@ -112,6 +112,16 @@ input, input:focus {
   margin-left: 40px;
 }
 
+#albumButtonIcon {
+  margin-left: 10px;
+  font-size: 50px;
+  color: #ffab40;
+}
+
+#albumButtonIcon:hover {
+  color: #ffac406b;
+}
+
 .card {
   border-radius: 10px;
 }
@@ -197,4 +207,9 @@ input, input:focus {
 
 .modal .modal-footer {
   background-color:  rgb(245, 245, 245);
+}
+
+#modalCloseIcon {
+  font-size: 40px;
+  color: rgba(0, 0, 0, 0.438);
 }

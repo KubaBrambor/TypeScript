@@ -1,7 +1,7 @@
 const container = document.getElementById('mainContainer');
 const albumsURL = "https://jsonplaceholder.typicode.com/albums";
 const photosURL = "https://jsonplaceholder.typicode.com/photos";
-
+const sessionStorage = window.sessionStorage;
 //modal trigger
 document.addEventListener('DOMContentLoaded', function() {
     var options = {};
@@ -65,10 +65,14 @@ function createAlbumCards(albums){
         cardContent.appendChild(cardTitle);
         const cardButtonDiv = document.createElement('div');
         cardButtonDiv.className = "card-action";
-        const cardButton = document.createElement('button');
-        cardButton.className = "waves-effect waves-light btn blue cardButton";
-        cardButton.innerText = "OPEN";
+        const cardButton = document.createElement('a');
+        cardButton.className = "waves-effect waves-light cardButton";
         cardButton.addEventListener('click', printPhotoCards.bind(Object.create(null), albums, album.id, album.title));
+        const cardButtonIcon = document.createElement('i');
+        cardButtonIcon.className = "material-icons";
+        cardButtonIcon.id = "albumButtonIcon";
+        cardButtonIcon.innerText = "folder_open"
+        cardButton.appendChild(cardButtonIcon);
         cardButtonDiv.appendChild(cardButton);
         card.appendChild(cardContent);
         card.appendChild(cardButtonDiv);
@@ -143,8 +147,6 @@ function createPhotoCards(photos, albums, albumTitle){
 function searchCards(albums){   //get albums by default, as parameter, since we download or albums at the beginning
     const checkedAlbumsOption = document.getElementById('searchAlbumsRadio').checked;
     const checkedPhotosOption = document.getElementById('searchPhotosRadio').checked;
-    let searchInputValue = document.getElementById('searchInputValidate');
-    let result = []; //array for matching albums
     if(checkedAlbumsOption){
         if(document.getElementById('subTitlePhotos')){
             document.getElementById('subTitlePhotos').remove();
@@ -155,18 +157,35 @@ function searchCards(albums){   //get albums by default, as parameter, since we 
         const matchedAlbums = searchCardsLogic(albums, 0.35);
         createAlbumCards(matchedAlbums);
     } else if(checkedPhotosOption){
-        getData(photosURL)  //get photos to compare their titles for match
-        .then((photos) => {
+        // check if photos are stored in session storage
+        if(!sessionStorage.getItem('photos')){
+            getData(photosURL)  //get photos to compare their titles for match
+            .then((photos) => {
+                if(document.getElementById('subTitlePhotos')){
+                    document.getElementById('subTitlePhotos').remove();
+                };
+                if(!document.getElementById('backButton')){ //adding back button if not existed
+                    createBackButton(albums);
+                };
+                const JSONphotos = JSON.stringify(photos);
+                sessionStorage.setItem('photos', JSONphotos);
+                const matchedPhotos = searchCardsLogic(photos, 0.55)
+                console.log(matchedPhotos);
+                createPhotoCards(matchedPhotos, albums, "Searched photos")
+            });
+        } else {    //if not, save photos in session storage
+            const sessionPhotos = JSON.parse(sessionStorage.getItem('photos'));
             if(document.getElementById('subTitlePhotos')){
                 document.getElementById('subTitlePhotos').remove();
             };
             if(!document.getElementById('backButton')){ //adding back button if not existed
                 createBackButton(albums);
             };
-            const matchedPhotos = searchCardsLogic(photos, 0.55)
-            console.log(matchedPhotos);
+            const matchedPhotos = searchCardsLogic(sessionPhotos, 0.55)
+            console.log("from else session " + matchedPhotos);
             createPhotoCards(matchedPhotos, albums, "Searched photos")
-        });
+        }
+        
     };
 };
 /* logic with implemented "string-similarity" based on Dice's Coefficient
