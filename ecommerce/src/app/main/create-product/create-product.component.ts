@@ -12,15 +12,20 @@ export class CreateProductComponent {
   public confirmed: boolean = false;
   
   constructor() {
-    this.product = new Product("Margaryna", 0, '', false, 0);
+    this.product = new Product("", 0, '', false, 0);
   }
 
   printValue(event) {
     this.product.name = event.toUpperCase()
   }
-  createProduct() {
-    this.productArr.push({});
-    Object.assign(this.productArr[this.productArr.length-1], this.product)
-    console.log(this.productArr);
+  createProduct(productForm) {
+    if(productForm.valid){
+      this.productArr.push({});
+      Object.assign(this.productArr[this.productArr.length-1], this.product)
+      console.log(this.productArr);
+    } else { 
+      console.error("Stock form is in an invalid state.")
+    }
+    
   }
 }

@@ -1,0 +1,11 @@
+.product-name .ng-valid,
+.product-prize .ng-valid,
+.product-image .ng-valid {
+    background-color: green;
+}
+
+.product-name .ng-invalid,
+.product-prize .ng-invalid,
+.product-image .ng-invalid {
+    background-color: red;
+}
