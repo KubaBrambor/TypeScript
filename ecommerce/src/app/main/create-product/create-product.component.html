@@ -11,6 +11,9 @@
                     [ngModel]="product.name"
                     (ngModelChange)="product.name=$event">    
         </div>
+        <div *ngIf="productName.errors && productName.errors.required">
+            This field is mandatory
+        </div>
         <div class="product-prize">
             <input type="text"
                     placeholder="product prize"
@@ -19,6 +22,11 @@
                     #productPrize="ngModel"
                     [(ngModel)]="product.prize" >    
         </div>
+        <div *ngIf="productPrize.dirty && productPrize.invalid">
+            <div *ngIf="productPrize.errors.required">
+                This field is mandatory
+            </div>
+        </div>
         <div class="product-image">
             <input type="text"
                     placeholder="product image URL"
@@ -26,6 +34,9 @@
                     name="productURL"
                     #productImage="ngModel"
                     [(ngModel)]="product.imageURL">    
+        </div>
+        <div *ngIf="imageUrlValidator">
+            {{imageUrlValidator}}
         </div>
         <div class="productOnSale">
             <div class="product-sale">
