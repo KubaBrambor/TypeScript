@@ -35,8 +35,8 @@
                     #productImage="ngModel"
                     [(ngModel)]="product.imageURL">    
         </div>
-        <div *ngIf="imageUrlValidator">
-            {{imageUrlValidator}}
+        <div *ngIf="imageUrlValidatorText">
+            {{imageUrlValidatorText}}
         </div>
         <div class="productOnSale">
             <div class="product-sale">
@@ -55,9 +55,14 @@
         <div class="product-quantity">
             <input type="text"
                     placeholder="product quantity"
+                    required
                     name="productQuantity"
+                    #productQuantity="ngModel"
                     [(ngModel)]="product.quantity" >    
         </div>  
+        <div *ngIf="quantityValidatorText">
+            {{quantityValidatorText}}
+        </div>
         <div class="product-confirm">
             <input type="checkbox" name="productConfirmCheckbox"
                     [(ngModel)]="confirmed">

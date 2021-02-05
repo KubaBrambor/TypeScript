@@ -10,7 +10,8 @@ export class CreateProductComponent {
   public product: Product; 
   public productArr: {}[] = [];
   public confirmed: boolean = false;
-  public imageUrlValidator: string;
+  public imageUrlValidatorText: string;
+  public quantityValidatorText: string;
   
   constructor() {
     this.product = new Product("", 0, '', false, 0);
@@ -24,10 +25,14 @@ export class CreateProductComponent {
     if(productForm.valid){
       this.productArr.push({});
       Object.assign(this.productArr[this.productArr.length-1], this.product)
+      this.confirmed = false;
       console.log(this.productArr);
     } else { 
       if(productForm.form.controls.productURL.touched){
-        this.imageUrlValidator = "This field is mandatory! Please paste image URL."
+        this.imageUrlValidatorText = "This field is mandatory! Please paste image URL."
+      }
+      if(productForm.form.controls.productQuantity.value === 0){
+        this.quantityValidatorText = "Quantity must be higher than 0."
       }
       console.error("Stock form is in an invalid state.")
     }
