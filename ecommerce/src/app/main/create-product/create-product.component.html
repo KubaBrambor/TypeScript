@@ -2,75 +2,77 @@
 
 <div class="form-group">
     <form (ngSubmit)="createProduct(productForm)" #productForm="ngForm">
-        <div class="product-name">
-            <input type="text"
-                    placeholder="product name"
-                    required
-                    name="productName"
-                    #productName="ngModel"
-                    [ngModel]="product.name"
-                    (ngModelChange)="product.name=$event">    
-        </div>
-        <div *ngIf="productName.errors && productName.errors.required">
-            This field is mandatory
-        </div>
-        <div class="product-prize">
-            <input type="text"
-                    placeholder="product prize"
-                    required
-                    name="productPrize"
-                    #productPrize="ngModel"
-                    [(ngModel)]="product.prize" >    
-        </div>
-        <div *ngIf="productPrize.dirty && productPrize.invalid">
-            <div *ngIf="productPrize.errors.required">
-                This field is mandatory
+        <div ngModelGroup="product">
+            <div class="product-name">
+                <input type="text"
+                        placeholder="product name"
+                        required
+                        name="productName"
+                        #productName="ngModel"
+                        [(ngModel)]="product.name">    
             </div>
-        </div>
-        <div class="product-image">
-            <input type="text"
-                    placeholder="product image URL"
-                    required
-                    name="productURL"
-                    #productImage="ngModel"
-                    [(ngModel)]="product.imageURL">    
-        </div>
-        <div *ngIf="imageUrlValidatorText">
-            {{imageUrlValidatorText}}
-        </div>
-        <div class="productOnSale">
-            <div class="product-sale">
-                <input type="radio"
-                        placeholder="on sale?"
-                        name="productOnSaleTrue"
-                        [(ngModel)]="product.onSale" [value]=true> True  
+                <div *ngIf="productName.touched && productName.errors && productName.errors.required">
+                    This field is mandatory
+                </div>
+            
+            <div class="product-prize">
+                <input type="text"
+                        placeholder="product prize"
+                        required
+                        name="productPrize"
+                        #productPrize="ngModel"
+                        ngModel>    
             </div>
-            <div class="product-sale">
-                <input type="radio"
-                        placeholder="on sale?"
-                        name="productOnSaleFalse"
-                        [(ngModel)]="product.onSale" [value]=false> False 
+                <div *ngIf="productPrize.touched && productPrize.errors && productPrize.errors.required">
+                    This field is mandatory
+                </div>
+            <div class="product-image">
+                <input type="text"
+                        placeholder="product image URL"
+                        required
+                        name="productURL"
+                        #productImage="ngModel"
+                        ngModel>    
             </div>
-        </div>  
-        <div class="product-quantity">
-            <input type="text"
-                    placeholder="product quantity"
-                    required
-                    name="productQuantity"
-                    #productQuantity="ngModel"
-                    [(ngModel)]="product.quantity" >    
-        </div>  
-        <div *ngIf="quantityValidatorText">
-            {{quantityValidatorText}}
-        </div>
-        <div class="product-confirm">
-            <input type="checkbox" name="productConfirmCheckbox"
-                    [(ngModel)]="confirmed">
-                    Confirm to create new product.
+            <div *ngIf="imageUrlValidatorText">
+                {{imageUrlValidatorText}}
+            </div>
+            <div class="productOnSale">
+                <!-- <div class="product-sale">
+                    <input type="radio"
+                            placeholder="on sale?"
+                            name="productOnSaleTrue"
+                            [ngValue]=true> True  
+                </div>
+                <div class="product-sale">
+                    <input type="radio"
+                            placeholder="on sale?"
+                            name="productOnSaleFalse"
+                            [ngValue]="false"> False 
+                </div> -->
+                <select name="productOnSale" ngModel>
+                    <option [ngValue]="true">Yes</option>  
+                    <option [ngValue]="false">No</option>
+                </select>
+            </div>  
+            <div class="product-quantity">
+                <input type="text"
+                        placeholder="product quantity"
+                        required
+                        name="productQuantity"
+                        #productQuantity="ngModel"
+                        ngModel>    
+            </div>  
+            <div *ngIf="quantityValidatorText">
+                {{quantityValidatorText}}
+            </div>
+            <div class="product-confirm">
+                <input type="checkbox" name="productConfirmCheckbox"
+                        [(ngModel)]="confirmed">
+                        Confirm to create new product.
+            </div>
         </div>
         <button type="submit" [disabled]="!confirmed">Create</button>
     </form>
     <button (click)="product.name='TEST'">reset product name</button>
 </div>
-
-<h4>Product name is {{product.onSale}}</h4>

@@ -28,10 +28,10 @@ export class CreateProductComponent {
       this.confirmed = false;
       console.log(this.productArr);
     } else { 
-      if(productForm.form.controls.productURL.touched){
+      if(productForm.form.controls.product.controls.productURL.touched){
         this.imageUrlValidatorText = "This field is mandatory! Please paste image URL."
       }
-      if(productForm.form.controls.productQuantity.value === 0){
+      if(productForm.form.controls.product.controls.productQuantity.value == 0){
         this.quantityValidatorText = "Quantity must be higher than 0."
       }
       console.error("Stock form is in an invalid state.")
