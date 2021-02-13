@@ -58,6 +58,7 @@
                         ngModel>
             </div>
         </div>
-        <button type="submit" id="registerButton">Register</button>
+        <button type="submit" id="registerButton" 
+                [disabled]="!registerForm.valid">Register</button>
     </form>
 </div>
