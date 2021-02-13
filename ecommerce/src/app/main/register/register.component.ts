@@ -7,8 +7,10 @@ import { User } from '../../model/user';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  constructor() { }
+  public selected:string;
+  constructor() {
+    this.selected = "male";
+   }
 
   ngOnInit() {
   }

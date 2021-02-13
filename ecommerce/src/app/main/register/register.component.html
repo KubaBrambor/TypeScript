@@ -1,1 +1,63 @@
 <p>register works!</p>
+
+<div class="form-group">
+    <form (ngSubmit)="createUser(registerForm)" #registerForm="ngForm">
+        <div ngModelGroup="registerUser">
+            <div class="user-name">
+                <input type="text"
+                        placeholder="Name"
+                        required
+                        name="userName"
+                        #userName="ngModel"
+                        ngModel>
+            </div>
+            <div class="user-surname">
+                <input type="text"
+                        placeholder="Surname"
+                        required
+                        name="userSurname"
+                        #userSurname="ngModel"
+                        ngModel>
+            </div>
+            <div class="user-age">
+                <input type="text"
+                        placeholder="Age"
+                        required
+                        name="userAge"
+                        #userAge="ngModel"
+                        ngModel>
+            </div>
+            <div class="user-sex">
+                <select name="userSex" [(ngModel)]="selected">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+            <div class="user-street">
+                <input type="text"
+                        placeholder="Street"
+                        required
+                        name="userStreet"
+                        #userStreet="ngModel"
+                        ngModel>
+            </div>
+            <div class="user-postal-code">
+                <input type="text"
+                        placeholder="Postal Code"
+                        required
+                        name="userPostalCode"
+                        #userPostalCode="ngModel"
+                        ngModel>
+            </div>
+            <div class="user-city">
+                <input type="text"
+                        placeholder="City"
+                        required
+                        name="userCity"
+                        #userCity="ngModel"
+                        ngModel>
+            </div>
+        </div>
+        <button type="submit" id="registerButton">Register</button>
+    </form>
+</div>
