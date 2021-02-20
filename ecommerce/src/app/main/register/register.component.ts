@@ -21,8 +21,9 @@ export class RegisterComponent implements OnInit {
     if(registerForm.valid){
       const name = registerForm.form.controls.registerUser.controls.userName.value;
       const surname = registerForm.form.controls.registerUser.controls.userSurname.value;
+      const email = registerForm.form.controls.registerUser.controls.userEmail.value;
       const age = registerForm.form.controls.registerUser.controls.userAge.value;
-      const sex = registerForm.form.controls.registerUser.controls.userSex.value;
+      const gender = registerForm.form.controls.registerUser.controls.userSex.value;
       const street = registerForm.form.controls.registerUser.controls.userStreet.value;
       const postal_code = registerForm.form.controls.registerUser.controls.userPostalCode.value;
       const city = registerForm.form.controls.registerUser.controls.userCity.value;
@@ -32,7 +33,7 @@ export class RegisterComponent implements OnInit {
         city:city
       }
       registerForm.reset()
-      console.log(new User(name, surname, age, sex, adress));
+      console.log(new User(name, surname, email, age, gender, adress));
     } else {
       // if(registerForm.form.controls.registerUser.controls.userName.value === ""){
       //   this.nameEmptyInput = ""

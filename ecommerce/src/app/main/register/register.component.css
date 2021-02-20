@@ -23,7 +23,7 @@
     width: 490px;
 }
 
-.requiredAsterisk {
+.warning-symbol {
     display: inline-block;
     font-size: 25px;
     color: red;
@@ -32,7 +32,25 @@
     width: 5px;
 }
 
-.registerButton {
+#emailAddon {
+    width: 40px;
+}
+
+.email-group {
+    width: 495px;
+}
+
+#email-group-astriks {
+    width: 5px;
+}
+
+#email-group-exclamation {
+    width: 5px
+}
+
+
+
+.register-button {
     margin-top: 10px;
     text-align: center;
 }

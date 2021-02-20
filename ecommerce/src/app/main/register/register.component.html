@@ -2,9 +2,20 @@
 
 <div class="form-group">
     <form (ngSubmit)="createUser(registerForm)" #registerForm="ngForm">
-        <div *ngIf="!registerForm.valid && registerForm.touched" class="alert alert-warning" role="alert">
-            Please, fill all required rows.
+        <!-- FORM ALERTS -->
+        <div *ngIf="userName.touched && userName.errors && userName.errors.required ||
+                    userSurname.touched && userSurname.errors && userSurname.errors.required ||
+                    userEmail.touched && userEmail.errors && userEmail.errors.required ||
+                    userStreet.touched && userStreet.errors && userStreet.errors.required ||
+                    userCity.touched && userCity.errors && userCity.errors.required" 
+                    class="alert alert-warning" role="alert">
+                    Please, fill all required rows.
         </div>
+        <div *ngIf="userEmail.touched && userEmail.errors && userEmail.errors.pattern" 
+                    class="alert alert-warning" role="alert">
+                    Please, correct your email.
+        </div>
+        <!-- --- -->
         <div ngModelGroup="registerUser">
             <div class="user-name form_row">
                 <input type="text"
@@ -14,7 +25,7 @@
                         name="userName"
                         #userName="ngModel"
                         ngModel>
-                <p class="requiredAsterisk" *ngIf="userName.touched && userName.errors && userName.errors.required">*</p>   
+                <p class="warning-symbol" *ngIf="userName.touched && userName.errors && userName.errors.required">*</p>   
             </div>
             <div class="user-surname form_row">
                 <input type="text"
@@ -24,7 +35,26 @@
                         name="userSurname"
                         #userSurname="ngModel"
                         ngModel>
-                <p class="requiredAsterisk" *ngIf="userSurname.touched && userSurname.errors && userSurname.errors.required">*</p> 
+                <p class="warning-symbol" *ngIf="userSurname.touched && userSurname.errors && userSurname.errors.required">*</p> 
+            </div>
+            <div class="user-email form_row input-group email-group">
+                <span class="input-group-text" id="emailAddon">@</span>
+                <input type="text"
+                        class="form-control"
+                        id="userEmail"
+                        placeholder="Email"
+                        required
+                        name="userEmail"
+                        #userEmail="ngModel"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" 
+                        ngModel>
+                <div id="email-group-astriks">
+                    <p class="warning-symbol" *ngIf="userEmail.touched && userEmail.errors && userEmail.errors.required">*</p>
+                </div>
+                <div id="email-group-exclamation">
+                    <p class="warning-symbol" *ngIf="userEmail.touched && userEmail.errors && userEmail.errors.pattern">!</p>
+                </div>         
+                 
             </div>
             <div class="user-age form_row">
                 <input type="text"
@@ -48,7 +78,7 @@
                         name="userStreet"
                         #userStreet="ngModel"
                         ngModel>
-                <p class="requiredAsterisk" *ngIf="userStreet.touched && userStreet.errors && userStreet.errors.required">*</p> 
+                <p class="warning-symbol" *ngIf="userStreet.touched && userStreet.errors && userStreet.errors.required">*</p> 
             </div>
             <div class="user-postal-code form_row">
                 <input type="text"
@@ -66,10 +96,10 @@
                         name="userCity"
                         #userCity="ngModel"
                         ngModel>
-                <p class="requiredAsterisk" *ngIf="userCity.touched && userCity.errors && userCity.errors.required">*</p> 
+                <p class="warning-symbol" *ngIf="userCity.touched && userCity.errors && userCity.errors.required">*</p> 
             </div>
         </div>
-        <div class="registerButton">
+        <div class="register-button">
             <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
         </div>
         

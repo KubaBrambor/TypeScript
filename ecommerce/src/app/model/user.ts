@@ -1,14 +1,16 @@
 export class User {
     public name;
     public surname;
+    public email;
     public age;
-    public sex;
+    public gender;
     public adress;
-    constructor(name:string, surname:string, age:number, sex:string, adress:object){
+    constructor(name:string, surname:string, email:string, age:number, gender:string, adress:object){
         this.name = name;
         this.surname = surname;
+        this.email = email;
         this.age = age;
-        this.sex = sex;
+        this.gender = gender;
         this.adress = adress;
     }
 
