@@ -1,0 +1,14 @@
+.form-group {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form_row {
+    margin-top: 10px;
+}
+
+.register_button {
+    margin-top: 10px;
+    text-align: center;
+}

@@ -3,54 +3,60 @@
 <div class="form-group">
     <form (ngSubmit)="createUser(registerForm)" #registerForm="ngForm">
         <div ngModelGroup="registerUser">
-            <div class="user-name">
+            <div class="user-name form_row">
                 <input type="text"
+                        class="form-control"
                         placeholder="Name"
                         required
                         name="userName"
                         #userName="ngModel"
                         ngModel>
             </div>
-            <div class="user-surname">
+            <div class="user-surname form_row">
                 <input type="text"
+                        class="form-control"
                         placeholder="Surname"
                         required
                         name="userSurname"
                         #userSurname="ngModel"
                         ngModel>
             </div>
-            <div class="user-age">
+            <div class="user-age form_row">
                 <input type="text"
+                        class="form-control"
                         placeholder="Age"
                         required
                         name="userAge"
                         #userAge="ngModel"
                         ngModel>
             </div>
-            <div class="user-sex">
-                <select name="userSex" [(ngModel)]="selected">
+            <div class="user-sex form_row">
+                <select class="form-select" name="userSex" [(ngModel)]="selected">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
             </div>
-            <div class="user-street">
+            <div class="user-street form_row">
                 <input type="text"
+                        class="form-control"
                         placeholder="Street"
                         required
                         name="userStreet"
                         #userStreet="ngModel"
                         ngModel>
             </div>
-            <div class="user-postal-code">
+            <div class="user-postal-code form_row">
                 <input type="text"
+                        class="form-control"
                         placeholder="Postal Code"
                         required
                         name="userPostalCode"
                         #userPostalCode="ngModel"
                         ngModel>
             </div>
-            <div class="user-city">
+            <div class="user-city form_row">
                 <input type="text"
+                        class="form-control"
                         placeholder="City"
                         required
                         name="userCity"
@@ -58,7 +64,9 @@
                         ngModel>
             </div>
         </div>
-        <button type="submit" id="registerButton" 
-                [disabled]="!registerForm.valid">Register</button>
+        <div class="register_button">
+            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+        </div>
+        
     </form>
 </div>

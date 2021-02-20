@@ -26,6 +26,7 @@ export class CreateProductComponent {
       this.productArr.push({});
       Object.assign(this.productArr[this.productArr.length-1], this.product)
       this.confirmed = false;
+      productForm.reset()
       console.log(this.productArr);
     } else { 
       if(productForm.form.controls.product.controls.productURL.touched){

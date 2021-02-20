@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
         postal_code:postal_code,
         city:city
       }
-
+      registerForm.reset()
       console.log(new User(name, surname, age, sex, adress));
     } else {
       // if(registerForm.form.controls.registerUser.controls.userName.value === ""){
