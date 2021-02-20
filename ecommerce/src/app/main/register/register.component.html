@@ -2,6 +2,9 @@
 
 <div class="form-group">
     <form (ngSubmit)="createUser(registerForm)" #registerForm="ngForm">
+        <div *ngIf="!registerForm.valid && registerForm.touched" class="alert alert-warning" role="alert">
+            Please, fill all required rows.
+        </div>
         <div ngModelGroup="registerUser">
             <div class="user-name form_row">
                 <input type="text"
@@ -11,6 +14,7 @@
                         name="userName"
                         #userName="ngModel"
                         ngModel>
+                <p class="requiredAsterisk" *ngIf="userName.touched && userName.errors && userName.errors.required">*</p>   
             </div>
             <div class="user-surname form_row">
                 <input type="text"
@@ -20,12 +24,12 @@
                         name="userSurname"
                         #userSurname="ngModel"
                         ngModel>
+                <p class="requiredAsterisk" *ngIf="userSurname.touched && userSurname.errors && userSurname.errors.required">*</p> 
             </div>
             <div class="user-age form_row">
                 <input type="text"
                         class="form-control"
                         placeholder="Age"
-                        required
                         name="userAge"
                         #userAge="ngModel"
                         ngModel>
@@ -44,12 +48,12 @@
                         name="userStreet"
                         #userStreet="ngModel"
                         ngModel>
+                <p class="requiredAsterisk" *ngIf="userStreet.touched && userStreet.errors && userStreet.errors.required">*</p> 
             </div>
             <div class="user-postal-code form_row">
                 <input type="text"
                         class="form-control"
                         placeholder="Postal Code"
-                        required
                         name="userPostalCode"
                         #userPostalCode="ngModel"
                         ngModel>
@@ -62,9 +66,10 @@
                         name="userCity"
                         #userCity="ngModel"
                         ngModel>
+                <p class="requiredAsterisk" *ngIf="userCity.touched && userCity.errors && userCity.errors.required">*</p> 
             </div>
         </div>
-        <div class="register_button">
+        <div class="registerButton">
             <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
         </div>
         
