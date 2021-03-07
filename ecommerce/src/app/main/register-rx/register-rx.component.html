@@ -49,6 +49,17 @@
                     placeholder="Postal Code"
                     name="postalCode"
                     formControlName="postalCodeControl">
+            <div class="alert alert-warning" 
+                 *ngIf="registerForm.get('postalCodeControl').invalid &&
+                        (registerForm.get('postalCodeControl').dirty ||
+                        registerForm.get('postalCodeControl').touched)">
+                <div *ngIf="registerForm.get('postalCodeControl').errors.pattern">
+                    "Postal code must be in XX-XXX or XXXXX format."
+                </div>
+                <div *ngIf="registerForm.get('postalCodeControl').errors.required">
+                    "Postal code is required field!"
+                </div>
+            </div>
         </div>
         <div class="user-city form_row">
             <input type="text"
@@ -58,7 +69,7 @@
                     formControlName="cityControl">
         </div>
         <div class="register-button">
-            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </div>
     </form>
 </div>
