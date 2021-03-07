@@ -54,7 +54,6 @@
                 <div id="email-group-exclamation">
                     <p class="warning-symbol" *ngIf="userEmail.touched && userEmail.errors && userEmail.errors.pattern">!</p>
                 </div>         
-                 
             </div>
             <div class="user-age form_row">
                 <input type="text"
@@ -102,6 +101,5 @@
         <div class="register-button">
             <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
         </div>
-        
     </form>
 </div>

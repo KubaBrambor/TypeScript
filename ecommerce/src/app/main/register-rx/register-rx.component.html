@@ -1,14 +1,67 @@
 <p>Reactive Form</p>
 
 <div class="form-group">
-    <div class="stock-name">
-        <input type="text"
-                placeholder="Stock Name"
-                name="stockName"
-                [formControl]="nameControl">
-    </div>
-    <button (click)="onSubmit()">Submit</button>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="user-name form_row">
+            <input type="text"
+                    class="form-control"
+                    placeholder="Name"
+                    name="name"
+                    formControlName="nameControl">
+        </div>
+        <div class="user-surname form_row">
+            <input type="text"
+                    class="form-control"
+                    placeholder="Surname"
+                    name="surname"
+                    formControlName="surnameControl">  
+        </div>
+        <div class="user-email form_row">
+            <input type="text"
+                    class="form-control"
+                    placeholder="Email"
+                    name="email"
+                    formControlName="emailControl">
+        </div>
+        <div class="user-age form_row">
+            <input type="text"
+                    class="form-control"
+                    placeholder="Age"
+                    name="age"
+                    formControlName="ageControl">
+        </div>
+        <div class="user-gender form_row">
+            <select name="gender" formControlName="genderControl" class="form-select">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+        <div class="user-street form_row">
+            <input type="text"
+                    class="form-control"
+                    placeholder="Street"
+                    name="street"
+                    formControlName="streetControl">
+        </div>
+        <div class="user-postal-code form_row">
+            <input type="text"
+                    class="form-control"
+                    placeholder="Postal Code"
+                    name="postalCode"
+                    formControlName="postalCodeControl">
+        </div>
+        <div class="user-city form_row">
+            <input type="text"
+                    class="form-control"
+                    placeholder="City"
+                    name="city"
+                    formControlName="cityControl">
+        </div>
+        <div class="register-button">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
 </div>
 
-<p>Form Control value: {{ nameControl.value | json }}</p>
-<p>Form Control status: {{ nameControl.status | json }}</p>
+<p>Form Control value: {{ registerForm.value | json }}</p>
+<p>Form Control status: {{ registerForm.status | json }}</p>
