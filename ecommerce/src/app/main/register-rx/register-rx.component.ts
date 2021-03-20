@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, Form } from '@angular/forms';
-
+import { User } from '../../model/user';
 @Component({
   selector: 'app-register-rx',
   templateUrl: './register-rx.component.html',
@@ -9,48 +9,73 @@ import { FormControl, FormGroup, FormBuilder, Validators, Form } from '@angular/
 export class RegisterRXComponent {
   public registerForm: FormGroup; 
   public formBuilder: FormBuilder;
+  private user: User;
   constructor(private fb: FormBuilder) {
    }
 
   ngOnInit() {
     this.createForm();
+    this.user = new User('John', 'Barbecue', 'j.barbecue@gmail.com', 35, 'Male', 
+                        {street: 'Route 66', postalCode: '40-444', city: 'Los Angeles'})
   }
 
    createForm() {
      this.registerForm = this.fb.group({
-        nameControl: [null, [Validators.required, Validators.minLength(2)]],
-        surnameControl: [null, [Validators.required, Validators.minLength(2)]],
-        emailControl: [null, [
+        name: [null, [Validators.required, Validators.minLength(2)]],
+        surname: [null, [Validators.required, Validators.minLength(2)]],
+        email: [null, [
           Validators.required,
           Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
         ]],
-        ageControl: [null, [
+        age: [null, [
           Validators.required, 
           Validators.min(1),
           Validators.pattern("^[0-9]*$")
         ]],
-        genderControl: ['male'],
-        streetControl: [null, [
+        gender: ['male'],
+        street: [null, [
           Validators.required,
           Validators.minLength(3)
         ]],
-        postalCodeControl: [null, [
+        postalCode: [null, [
           Validators.required,
           Validators.pattern("^\\d{2}[- ]{0,1}\\d{3}$")
         ]],
-        cityControl: [null, [
+        city: [null, [
           Validators.required,
           Validators.minLength(2)
         ]]
       });
    };
-  get name() { return this.registerForm.get('nameControl') };
-  get surname() { return this.registerForm.get('surnameControl') };
-  get postalCode() { return this.registerForm.get('postalCodeControl') };
-  get email() { return this.registerForm.get('emailControl') };
-  get age() { return this.registerForm.get('ageControl') };
+  get name() { return this.registerForm.get('name') };
+  get surname() { return this.registerForm.get('surname') };
+  get postalCode() { return this.registerForm.get('postalCode') };
+  get email() { return this.registerForm.get('email') };
+  get age() { return this.registerForm.get('age') };
+  
+  flatObj(object_to_flat){
+    const flat_object = {};
+    function getNestedObj(obj){
+        Object.keys(obj).forEach(key => {
+            if(typeof obj[key] !== 'object'){
+                flat_object[key] = obj[key]
+            } else {
+                let nested_obj = obj[key];
+                getNestedObj(nested_obj);
+            };
+        });
+    };
+    getNestedObj(object_to_flat);
+    return flat_object;
+  };
 
+  loadUserFromServer() {
+    console.log(this.user)
+    let userFormModel = Object.assign({}, this.flatObj(this.user));
+    this.registerForm.setValue(userFormModel) 
+  }
   onSubmit() {
     console.log('Name COntrol Value', this.registerForm.value, this.registerForm)
   }
+
 }

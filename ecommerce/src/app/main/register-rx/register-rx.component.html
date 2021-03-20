@@ -11,7 +11,7 @@
                     class="form-control"
                     placeholder="Name"
                     name="name"
-                    formControlName="nameControl">
+                    formControlName="name">
             <div class="alert alert-warning"
                 *ngIf="name.invalid &&
                     (name.touched || name.dirty)">
@@ -28,7 +28,7 @@
                     class="form-control"
                     placeholder="Surname"
                     name="surname"
-                    formControlName="surnameControl">  
+                    formControlName="surname">  
             <div class="alert alert-warning"
                 *ngIf="surname.invalid && (surname.touched || surname.drity)">
                 <div *ngIf="surname.errors.minlength">
@@ -44,7 +44,7 @@
                     class="form-control"
                     placeholder="Email"
                     name="email"
-                    formControlName="emailControl">
+                    formControlName="email">
             <div class="alert alert-warning"
                 *ngIf="email.invalid && (email.touched || email.dirty)">
                 <div *ngIf="email.errors.pattern">
@@ -60,7 +60,7 @@
                     class="form-control"
                     placeholder="Age"
                     name="age"
-                    formControlName="ageControl">
+                    formControlName="age">
             <div class="alert alert-warning" 
                 *ngIf="age.invalid && (age.touched || age.dirty)">
                 <div *ngIf="age.errors.min">
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="user-gender form_row">
-            <select name="gender" formControlName="genderControl" class="form-select">
+            <select name="gender" formControlName="gender" class="form-select">
                 <option value="male">Male</option>
                 <option value="female">Female</option>
             </select>
@@ -85,14 +85,14 @@
                     class="form-control"
                     placeholder="Street"
                     name="street"
-                    formControlName="streetControl">
+                    formControlName="street">
         </div>
         <div class="user-postal-code form_row">
             <input type="text"
                     class="form-control"
                     placeholder="Postal Code"
                     name="postalCode"
-                    formControlName="postalCodeControl">
+                    formControlName="postalCode">
             <div class="alert alert-warning" 
                  *ngIf="postalCode.invalid &&
                         (postalCode.dirty ||
@@ -110,10 +110,24 @@
                     class="form-control"
                     placeholder="City"
                     name="city"
-                    formControlName="cityControl">
+                    formControlName="city">
         </div>
         <div class="register-button">
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">
+                Register
+            </button>
+            <button type="button" class="btn btn-primary"
+                (click)="resetForm()">
+                    Reset
+            </button>
+            <button type="button" class="btn btn-primary"
+                (click)="loadUserFromServer()">
+                    Load User
+            </button>
+            <button type="button" class="btn btn-primary"
+                (click)="patchRegisterForm()">
+                    Patch Form
+            </button>
         </div>
     </form>
 </div>
