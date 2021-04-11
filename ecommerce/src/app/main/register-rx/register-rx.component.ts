@@ -7,15 +7,14 @@ import { User } from '../../model/user';
   styleUrls: ['./register-rx.component.css']
 })
 export class RegisterRXComponent {
-  public registerForm: FormGroup; 
-  public formBuilder: FormBuilder;
+  public registerForm: FormGroup;
   private user: User;
   constructor(private fb: FormBuilder) {
    }
 
   ngOnInit() {
     this.createForm();
-    this.user = new User('John', 'Barbecue', 'j.barbecue@gmail.com', 35, 'Male', 
+    this.user = new User('John', 'Barbecue', 'j.barbecue@gmail.com', 35, 'male', 
                         {street: 'Route 66', postalCode: '40-444', city: 'Los Angeles'})
   }
 
@@ -70,10 +69,17 @@ export class RegisterRXComponent {
   };
 
   loadUserFromServer() {
-    console.log(this.user)
+    console.log(this.user);
     let userFormModel = Object.assign({}, this.flatObj(this.user));
-    this.registerForm.setValue(userFormModel) 
+    this.registerForm.setValue(userFormModel);
   }
+
+  patchUserFormServer() {
+    console.log(this.user);
+    let userFormModel = Object.assign({}, this.user);
+    this.registerForm.patchValue(userFormModel);
+  }
+
   onSubmit() {
     console.log('Name COntrol Value', this.registerForm.value, this.registerForm)
   }
