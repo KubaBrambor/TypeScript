@@ -112,9 +112,39 @@
                     name="city"
                     formControlName="city">
         </div>
+        <div formArrayName="pet">
+            <div *ngFor="let x of pet.controls; let i = index"
+                    [formGroupName] = "i"
+                    class="pets">
+                <div>
+                    Pet {{ i + 1 }}
+                </div>
+                <div>
+                    <input type="text"
+                            placeholder="Pet name"
+                            formControlName="name">
+                </div>
+                <div>
+                    <input type="text"
+                            placeholder="Pet spicie"
+                            formControlName="species">
+                </div>
+                <div>
+                    <input type="text"
+                            placeholder="Pet age"
+                            formControlName="age">
+                </div>  
+                <button type="button" (click)="removePet(i)">
+                    Remove Pet
+                </button>
+            </div>
+        </div>
+        <button type="button" (click)="addPet()">
+            Add Pet
+        </button>
         <div class="register-button">
             <button type="submit" class="btn btn-primary">
-                Register
+                    Register
             </button>
             <button type="button" class="btn btn-primary"
                 (click)="resetForm()">

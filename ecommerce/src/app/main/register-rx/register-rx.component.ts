@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators, Form } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators, Form, FormArray } from '@angular/forms';
 import { User } from '../../model/user';
+import { Pet } from '../../model/pet'
 @Component({
   selector: 'app-register-rx',
   templateUrl: './register-rx.component.html',
@@ -43,7 +44,8 @@ export class RegisterRXComponent {
         city: [null, [
           Validators.required,
           Validators.minLength(2)
-        ]]
+        ]],
+        pet: this.fb.array([])
       });
    };
   get name() { return this.registerForm.get('name') };
@@ -51,7 +53,20 @@ export class RegisterRXComponent {
   get postalCode() { return this.registerForm.get('postalCode') };
   get email() { return this.registerForm.get('email') };
   get age() { return this.registerForm.get('age') };
-  
+  get pet(): FormArray { return this.registerForm.get('pet') as FormArray };
+
+  addPet() {
+    this.pet.push(this.fb.group({
+      name: ['', Validators.required],
+      species: ['', Validators.required],
+      age: [0, Validators.required]
+    }))
+  }
+
+  removePet(index: number){
+    this.pet.removeAt(index);
+  }
+
   flatObj(object_to_flat){
     const flat_object = {};
     function getNestedObj(obj){
@@ -81,7 +96,20 @@ export class RegisterRXComponent {
   }
 
   onSubmit() {
-    console.log('Name COntrol Value', this.registerForm.value, this.registerForm)
+    let formValue = this.registerForm.value
+    console.log('Name COntrol Value', formValue)
+    let user = new User(formValue.name, formValue.surname, formValue.email, formValue.age, formValue.gender, 
+      {'street':formValue.street,
+      'postalCode': formValue.postalCode,
+      'city': formValue.city})
+    let pets = [];
+    for(let x of formValue.pet){
+      let pet = new Pet(x.name, x.species, x.age)
+      pets.push(pet);
+    }
+    user.addPet = pets;
+    console.log(user)
+    
   }
 
 }
