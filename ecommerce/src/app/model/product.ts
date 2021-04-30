@@ -12,6 +12,16 @@ export class Product {
         this._favourite = value;
     }
 
+    // setFavourite(event){
+    //     this.favourite= true;
+    //     console.log('Added to favourite! ' + this.favourite)
+    // }
+
+    // removeFavourite(event){
+    //     this.favourite = false;
+    //     console.log('Removed from favourite! ' + this.favourite)
+    // }
+
     inStock(){
         return this.quantity > 0;
     }

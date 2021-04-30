@@ -10,4 +10,9 @@
         <option *ngFor="let amount of product.quantityArray" value="amount">{{amount}}</option>
     </select>
     <button class="plus" (click)="addQuantity(i)" [disabled]="product.quantity == product.amount">+</button>
+    <button (click)="toggleFavouriteEmit(i)"
+            *ngIf="!product.favourite">Add to favourite</button>
+            
+    <button (click)="toggleFavouriteEmit(i)"
+            *ngIf="product.favourite">Remove from favourite</button>
 </div>

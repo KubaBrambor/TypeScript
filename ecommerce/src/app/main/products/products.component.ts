@@ -12,10 +12,12 @@ export class ProductsComponent implements OnInit {
   @Input() public productsArray: Product[];
   @Output() private sendIndex: EventEmitter<number>;
   @Output() private sendIndexSubstract: EventEmitter<number>;
+  @Output() private toggleFavourite: EventEmitter<number>;
   public product: Product;
   constructor() {
     this.sendIndex = new EventEmitter<number>();
     this.sendIndexSubstract = new EventEmitter<number>();
+    this.toggleFavourite = new EventEmitter<number>();
    }
 
   ngOnInit() {
@@ -33,4 +35,7 @@ export class ProductsComponent implements OnInit {
     this.sendIndexSubstract.emit(i)
   }
 
+  toggleFavouriteEmit(i: number){
+    this.toggleFavourite.emit(i);
+  }
 }

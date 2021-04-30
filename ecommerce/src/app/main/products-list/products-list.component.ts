@@ -28,6 +28,11 @@ export class ProductsListComponent implements OnInit {
     this.productsList[i].amount--;
   }
   
+  onToggleFavourite(i: number){
+    this.productsList[i].favourite = !this.productsList[i].favourite;
+    console.log('onToggleFavourite triggered. ')
+  }
+
   productStyles(i, productsList){
     return {
       'positive': productsList[i].inStock(),
