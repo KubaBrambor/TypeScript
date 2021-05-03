@@ -1,8 +1,41 @@
 <p>products-list works!</p>
-<app-products [productsArray]="productsList" [productClasses]="productStyles" 
+<!-- <app-products [productClasses]="productStyles" 
             (sendIndexSubstract)="subtractQuantity($event)" (sendIndex)="addQuantity($event)"
-            (toggleFavourite)="onToggleFavourite($event)"></app-products>
+            (toggleFavourite)="onToggleFavourite($event)"></app-products> -->
 
+            <!-- <div *ngFor="let prod of productsList; index as i" class="product-container">
+                <h3 class="name">{{product.name}}</h3>
+                <h4 class="price">Cena: {{product.prize}} zł</h4>
+                <h5 [ngClass]="productStyles(i)">Avaliable</h5>
+                <button class="minus" (click)="subtractQuantity(i)" *ngIf="product.amount !== 0">-</button>
+                <input type="text" class="quantity" [value]="product.amount">
+                <select id="cars">
+                    <option *ngFor="let amount of product.quantityArray" value="amount">{{amount}}</option>
+                </select>
+                <button class="plus" (click)="addQuantity(i)" [disabled]="product.quantity == product.amount">+</button>
+                <button (click)="toggleFavouriteEmit(i)"
+                        *ngIf="!product.favourite">Add to favourite</button>
+                        
+                <button (click)="toggleFavouriteEmit(i)"
+                        *ngIf="product.favourite">Remove from favourite</button>
+            </div> -->
+
+            <div *ngFor="let product of productsList; index as i" class="product-container">
+                <h3 class="name">{{ product.name }}</h3>
+                <h4 class="price"> Cena: {{product.prize}} zł</h4>
+                <h5 [ngClass]="productStyles(product)">Avaliable</h5>
+                <button class="minus" (click)="subtractQuantity(i)" *ngIf="product.amount !== 0">-</button>
+                <input type="text" class="quantity" [value]="product.amount">
+                <select id="cars">
+                    <option *ngFor="let amount of product.quantityArray" value="amount">{{amount}}</option>
+                </select>
+                <button class="plus" (click)="addQuantity(i)" [disabled]="product.quantity == product.amount">+</button>
+                <button (click)="onToggleFavourite(i)"
+                        *ngIf="!product.favourite">Add to favourite</button>
+                        
+                <button (click)="onToggleFavourite(i)"
+                        *ngIf="product.favourite">Remove from favourite</button>
+            </div>
 
 <app-create-product></app-create-product>
 <br>

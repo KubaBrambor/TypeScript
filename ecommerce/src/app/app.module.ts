@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { ProductsListComponent } from './main/products-list/products-list.compon
 import { CreateProductComponent } from './main/create-product/create-product.component';
 import { RegisterComponent } from './main/register/register.component';
 import { RegisterRXComponent } from './main/register-rx/register-rx.component';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,12 @@ import { RegisterRXComponent } from './main/register-rx/register-rx.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

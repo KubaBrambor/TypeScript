@@ -1,8 +1,7 @@
 <p>create-product works!</p>
-
+<div *ngIf="message">{{ message }}</div>
 <div class="form-group">
     <form (ngSubmit)="createProduct(productForm)" #productForm="ngForm">
-        <div ngModelGroup="product">
             <div class="product-name">
                 <input type="text"
                         placeholder="product name"
@@ -21,7 +20,7 @@
                         required
                         name="productPrize"
                         #productPrize="ngModel"
-                        ngModel>    
+                        [(ngModel)]="product.prize">    
             </div>
                 <div *ngIf="productPrize.touched && productPrize.errors && productPrize.errors.required">
                     This field is mandatory
@@ -30,9 +29,9 @@
                 <input type="text"
                         placeholder="product image URL"
                         required
-                        name="productURL"
+                        name="productImage"
                         #productImage="ngModel"
-                        ngModel>    
+                        [(ngModel)]="product.imageURL">    
             </div>
             <div *ngIf="imageUrlValidatorText">
                 {{imageUrlValidatorText}}
@@ -50,7 +49,7 @@
                             name="productOnSaleFalse"
                             [ngValue]="false"> False 
                 </div> -->
-                <select name="productOnSale" ngModel>
+                <select name="onSale" [(ngModel)]="product.onSale">
                     <option [ngValue]="true">Yes</option>  
                     <option [ngValue]="false">No</option>
                 </select>
@@ -59,9 +58,10 @@
                 <input type="text"
                         placeholder="product quantity"
                         required
+                        value="product.quantity"
                         name="productQuantity"
                         #productQuantity="ngModel"
-                        ngModel>    
+                        [(ngModel)]="product.quantity">    
             </div>  
             <div *ngIf="quantityValidatorText">
                 {{quantityValidatorText}}
@@ -71,7 +71,6 @@
                         [(ngModel)]="confirmed">
                         Confirm to create new product.
             </div>
-        </div>
         <button type="submit" [disabled]="!confirmed">Create</button>
     </form>
     <button (click)="product.name='TEST'">reset product name</button>

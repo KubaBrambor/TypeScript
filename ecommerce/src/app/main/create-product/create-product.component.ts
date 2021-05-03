@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../model/product';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-create-product',
@@ -8,26 +9,32 @@ import { Product } from '../../model/product';
 })
 export class CreateProductComponent {
   public product: Product; 
-  public productArr: {}[] = [];
   public confirmed: boolean = false;
+  public message: string = 'no message';
   public imageUrlValidatorText: string;
   public quantityValidatorText: string;
   
-  constructor() {
-    this.product = new Product("", 0, '', false, 0);
+  constructor(private productService: ProductService) {
+    this.product = new Product('', '','',false,"0")
   }
 
   printValue(event) {
     this.product.name = event.toUpperCase()
   }
   createProduct(productForm) {
-    console.log(productForm)
+    console.log(this.product)
     if(productForm.valid){
-      this.productArr.push({});
-      Object.assign(this.productArr[this.productArr.length-1], this.product)
+      let created = this.productService.createProduct(this.product);
+      if(created) {
+        this.message = 'Created product ' + this.product.name;
+        this.product = new Product('', '','',false,"0");
+      } else {
+        this.message = 'Product already exists';
+      }
+      console.log(this.productService.getProducts())
+      // Object.assign(this.productArr[this.productArr.length-1], this.product)
       this.confirmed = false;
-      productForm.reset()
-      console.log(this.productArr);
+      
     } else { 
       if(productForm.form.controls.product.controls.productURL.touched){
         this.imageUrlValidatorText = "This field is mandatory! Please paste image URL."

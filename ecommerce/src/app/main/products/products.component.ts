@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter,ChangeDetectionStrategy } from '@angular/core';
 import { Product } from '../../model/product';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -8,19 +9,21 @@ import { Product } from '../../model/product';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnInit {
+public productsArray: Product[];
   @Input() private productClasses;
-  @Input() public productsArray: Product[];
   @Output() private sendIndex: EventEmitter<number>;
   @Output() private sendIndexSubstract: EventEmitter<number>;
   @Output() private toggleFavourite: EventEmitter<number>;
   public product: Product;
-  constructor() {
+  constructor(private productService: ProductService) {
     this.sendIndex = new EventEmitter<number>();
     this.sendIndexSubstract = new EventEmitter<number>();
     this.toggleFavourite = new EventEmitter<number>();
+    
    }
 
   ngOnInit() {
+    this.productsArray = this.productService.getProducts()
   }
 
   productClassesFunc(i){

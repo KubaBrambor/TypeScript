@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../model/product';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-products-list',
@@ -9,16 +10,11 @@ import { Product } from '../../model/product';
 export class ProductsListComponent implements OnInit {
   public productsList:Product[];
   public product:any;
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
-    this.productsList =  [
-      new Product('Żel', 20, 'obraz', true, 0),
-      new Product('Mydło', 10, 'obraz', false, 5),
-      new Product('Pasta do zębów', 5, 'obraz', true, 10)
-    ];
-
-    this.product = new Product('Stol', 20, 'url', false, 20)
+    this.productsList =  this.productService.getProducts();
+    this.product = new Product('Stol', "20", 'url', false, "20")
   }
 
   addQuantity(i){
@@ -29,14 +25,15 @@ export class ProductsListComponent implements OnInit {
   }
   
   onToggleFavourite(i: number){
-    this.productsList[i].favourite = !this.productsList[i].favourite;
+    // this.productsList[i].favourite = !this.productsList[i].favourite;
+    this.productService.toggleFavourite(i);
     console.log('onToggleFavourite triggered. ')
   }
 
-  productStyles(i, productsList){
+  productStyles(product){
     return {
-      'positive': productsList[i].inStock(),
-      'negative': !productsList[i].inStock()
+      'positive': product.inStock(),
+      'negative': !product.inStock()
     }
   } 
 }
