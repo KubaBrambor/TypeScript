@@ -11,6 +11,7 @@ import { CreateProductComponent } from './main/create-product/create-product.com
 import { RegisterComponent } from './main/register/register.component';
 import { RegisterRXComponent } from './main/register-rx/register-rx.component';
 import { ProductService } from './services/product.service';
+import { MessageService } from './services/message.service';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,6 @@ import { ProductService } from './services/product.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
-  ],
-  providers: [
-    ProductService
   ],
   bootstrap: [AppComponent]
 })

@@ -9,7 +9,7 @@ import { ProductService } from '../../services/product.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsComponent implements OnInit {
-public productsArray: Product[];
+  public productsArray: Product[];
   @Input() private productClasses;
   @Output() private sendIndex: EventEmitter<number>;
   @Output() private sendIndexSubstract: EventEmitter<number>;
@@ -23,7 +23,8 @@ public productsArray: Product[];
    }
 
   ngOnInit() {
-    this.productsArray = this.productService.getProducts()
+    this.productService.getProducts()
+        .subscribe(products => this.productsArray)
   }
 
   productClassesFunc(i){

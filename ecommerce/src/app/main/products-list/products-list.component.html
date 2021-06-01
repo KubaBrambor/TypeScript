@@ -19,7 +19,7 @@
                 <button (click)="toggleFavouriteEmit(i)"
                         *ngIf="product.favourite">Remove from favourite</button>
             </div> -->
-
+            <h3>{{messageService.message}}</h3>
             <div *ngFor="let product of productsList; index as i" class="product-container">
                 <h3 class="name">{{ product.name }}</h3>
                 <h4 class="price"> Cena: {{product.prize}} zł</h4>

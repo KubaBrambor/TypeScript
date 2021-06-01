@@ -1,21 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../model/product';
 import { ProductService } from '../../services/product.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
-  styleUrls: ['./create-product.component.css']
+  styleUrls: ['./create-product.component.css'],
+  providers: [MessageService]
 })
-export class CreateProductComponent {
+export class CreateProductComponent implements OnInit {
   public product: Product; 
   public confirmed: boolean = false;
   public message: string = 'no message';
   public imageUrlValidatorText: string;
   public quantityValidatorText: string;
   
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,
+              public messageService: MessageService) {
     this.product = new Product('', '','',false,"0")
+  }
+
+  ngOnInit():void {
+    this.messageService.message = "Level create-product component";
   }
 
   printValue(event) {
@@ -24,13 +31,9 @@ export class CreateProductComponent {
   createProduct(productForm) {
     console.log(this.product)
     if(productForm.valid){
-      let created = this.productService.createProduct(this.product);
-      if(created) {
-        this.message = 'Created product ' + this.product.name;
-        this.product = new Product('', '','',false,"0");
-      } else {
-        this.message = 'Product already exists';
-      }
+      this.productService.createProduct(this.product)
+          .subscribe((result) => { this.messageService.message = result.msg }, 
+          (err)=> { this.messageService.message = err.msg })
       console.log(this.productService.getProducts())
       // Object.assign(this.productArr[this.productArr.length-1], this.product)
       this.confirmed = false;
